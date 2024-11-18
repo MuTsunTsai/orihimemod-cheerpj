@@ -9,16 +9,21 @@
 
 <body>
 	<div>
-		Known issues:<br>
-		1. "Open" doesn't work.<br>
-		2. You need to clear browser data as you reload this page.<br>
+		Known issue: "Open" doesn't work.<br>
 	</div>
 	<br>
 	<script>
 		(async function() {
+			await new Promise(resolve => {
+				const request = indexedDB.deleteDatabase("cjFS_/files/");
+				request.onsuccess = resolve;
+				request.onerror = resolve;
+				request.onblocked = resolve;
+			});
 			await cheerpjInit();
 			cheerpjCreateDisplay(1024, 768);
-			await cheerpjRunJar("/app/orihimemod-cheerpj/orihimeMod-0.3.2.1.jar");
+			const path = location.hostname.startsWith("mutsun") ? "orihimemod-cheerpj/" : "";
+			await cheerpjRunJar(`/app/${path}orihimeMod-0.3.2.1.jar`);
 		})();
 	</script>
 </body>
