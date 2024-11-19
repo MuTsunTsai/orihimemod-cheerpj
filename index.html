@@ -5,6 +5,11 @@
 	<meta charset="utf-8" />
 	<title>OrihimeMod in Browser</title>
 	<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+	<style>
+		.titleBar a.controls {
+			display: none;
+		}
+	</style>
 </head>
 
 <body>
@@ -21,9 +26,9 @@
 				request.onblocked = resolve;
 			});
 			await cheerpjInit();
-			cheerpjCreateDisplay(1024, 768);
+			cheerpjCreateDisplay(1200, 700);
 			const path = location.hostname.startsWith("mutsun") ? "orihimemod-cheerpj/" : "";
-			await cheerpjRunJar(`/app/${path}orihimeMod-0.3.2.1.jar`);
+			await cheerpjRunJar(`/app/${path}orihimeMod-1.0.0.jar`);
 		})();
 	</script>
 </body>
