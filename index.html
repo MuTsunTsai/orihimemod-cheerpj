@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,17 +6,43 @@
 	<title>OrihimeMod in Browser</title>
 	<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
 	<style>
-		.cheerpjNC > .window:nth-child(2) > .titleBar a.controls {
+		html,
+		body,
+		#app {
+			height: 100%;
+			width: 100%;
+			margin: 0;
+		}
+
+		#cheerpjDisplay {
+			background-color: unset !important;
+			
+		}
+
+		.cheerpjLoading {
+			background-image: url(cheerpj.svg) !important;
+		}
+
+		#cheerpjDisplay::before {
+			display: none;
+		}
+
+		#cheerpjDisplay::after {
+			outline-width: 0 !important;
+			top: calc(50vh + 60px);
+		}
+
+		.cheerpjNC>.window:nth-child(2)>.titleBar a.controls {
 			display: none;
 		}
 	</style>
 </head>
 
 <body>
-	<div>
+	<div id="app"></div>
+	<div style="position: absolute; top: 1rem; left: 1rem;">
 		Known issue: "Open" doesn't work, and touch device is not supported.<br>
 	</div>
-	<br>
 	<script>
 		(async function() {
 			await new Promise(resolve => {
@@ -26,7 +52,7 @@
 				request.onblocked = resolve;
 			});
 			await cheerpjInit();
-			cheerpjCreateDisplay(1200, 700);
+			cheerpjCreateDisplay(-1, -1, document.getElementById("app"));
 			const path = location.hostname.startsWith("mutsun") ? "orihimemod-cheerpj/" : "";
 			await cheerpjRunJar(`/app/${path}orihimeMod-1.0.0.jar`);
 		})();
